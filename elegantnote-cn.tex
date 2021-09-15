@@ -1,0 +1,203 @@
+%!TEX program = xelatex
+\documentclass[cn,hazy,pku,12pt,normal,math=newtx,cite=super]{elegantnote}
+\title{测量物理化学实验报告的写作焓}
+
+\author{吴华楠 \quad 1900011xyz}
+\institute{化学与分子工程学院}
+
+\expdate{\zhdate{1202/9/15}}
+\temperature{-273.15 \si{^{\circ}C}}
+\pressure{1.0 \si{GPa}}
+
+\usepackage{array}
+
+\begin{document}
+
+\maketitle
+
+\keywords{国家精品课 \quad 物理化学实验}
+
+\abstracts{
+本实验探究了常压条件下一篇物理实验报告的写作过程所释放的热量的影响因素。
+}
+
+\newpage
+
+
+\section{引言}
+
+本模板在\href{https://github.com/Benzoin96485/PCLreport_elegant}{Github 仓库}上保持更新。
+
+\section{实验部分}
+
+本模板衍生自 ElegantNote 2.30 版本，它是基于标准的 \LaTeX{} 文类 article 重新设计的、格式更加简化的笔记模板。本中文模板的编译流程推荐使用 \hologo{XeLaTeX} - \hologo{biber} - \hologo{XeLaTeX} - \hologo{XeLaTeX}。
+
+\subsection{纸张底色}
+
+本模板内置护眼模式（\lstinline{mode=geye}）和朦胧模式（\lstinline{mode=hazy}）。其中护眼模式设置纸张底色为绿豆沙颜色，而朦胧模式为淡蓝色，开启的方法如下：
+\begin{lstlisting}[frame=none]  
+  \documentclass[geye]{elegantnote} % or
+  \documentclass[mode=geye]{elegantnote}
+  \documentclass[hazy]{elegantnote} % or
+  \documentclass[mode=hazy]{elegantnote}
+\end{lstlisting}
+
+\begin{remark}
+  如果你想为自己的文档添加底色，可以在导言区添加下面设置：
+  \begin{lstlisting}
+    \definecolor{geyecolor}{RGB}{199,237,204}
+    \pagecolor{geyecolor}
+  \end{lstlisting}
+\end{remark}
+
+
+\subsection{纸张大小}
+
+原模板为了适配不同的设备，内置了 Pad（默认），Kindle，PC，A4 等纸张大小。这里为了符合实验报告要求，选择正常的 A4 大小的 PDF，即文档设置中的 \lstinline{device=normal}。页边距已经设置为 2.5 \si{cm}。
+
+
+\subsection{数学字体选项}
+
+本模板定义了一个数学字体选项（\lstinline{math}），可选项有三个：
+\begin{enumerate}
+  \item \lstinline{math=cm}（默认），使用 \LaTeX{} 默认数学字体（推荐，无需声明）；
+  \item \lstinline{math=newtx}，使用 \lstinline{newtxmath} 设置数学字体（默认，潜在问题比较多）。
+  \item \lstinline{math=mtpro2}，使用 \lstinline{mtpro2} 宏包设置数学字体，要求用户已经成功安装此宏包。
+\end{enumerate}
+
+
+\subsection{中文字体选项}
+模板提供中文字体选项 \lstinline{chinesefont}，可选项有
+\begin{enumerate}
+\item \lstinline{ctexfont}：默认选项，使用 \lstinline{ctex} 宏包根据系统自行选择字体，可能存在字体缺失的问题，更多内容参考 \lstinline{ctex} 宏包\href{https://ctan.org/pkg/ctex}{官方文档}\footnote{可以使用命令提示符，输入 \lstinline{texdoc ctex} 调出本地 \lstinline{ctex} 宏包文档}。
+\item \lstinline{founder}：方正字体选项，调用 \lstinline{ctex} 宏包并且使用 \lstinline{fontset=none} 选项，然后设置字体为方正四款免费字体，方正字体下载注意事项见后文。
+\item \lstinline{nofont}：调用 \lstinline{ctex} 宏包并且使用 \lstinline{fontset=none} 选项，不设定中文字体，用户可以自行设置中文字体，具体见后文。
+\end{enumerate}
+
+\noindent \textbf{注意：} 使用 \lstinline{founder} 选项或者 \lstinline{nofont} 时，必须使用 \hologo{XeLaTeX} 进行编译。
+
+\subsubsection{方正字体选项}
+由于使用 \lstinline{ctex} 宏包默认调用系统已有的字体，部分系统字体缺失严重，因此，用户希望能够使用其它字体，我们推荐使用方正字体。方正的{\songti 方正书宋}、{\heiti 方正黑体}、{\kaishu 方正楷体}、{\fangsong 方正仿宋}四款字体均可免费试用，且可用于商业用途。用户可以自行从\href{http://www.foundertype.com/}{方正字体官网}下载此四款字体，在下载的时候请\textbf{务必}注意选择 GBK 字符集，也可以使用 \href{https://www.latexstudio.net/}{\LaTeX{} 工作室}提供的\href{https://pan.baidu.com/s/1BgbQM7LoinY7m8yeP25Y7Q}{方正字体，提取码为：njy9} 进行安装。安装时，{\kaishu Win 10 用户请右键选择为全部用户安装，否则会找不到字体。}
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=0.9\textwidth]{founder.png}
+\end{figure}
+
+\subsubsection{其他中文字体}
+如果你想完全自定义字体\footnote{这里仍然以方正字体为例。}，你可以选择 \lstinline{chinesefont=nofont}，然后在导言区设置
+\begin{lstlisting}
+\setCJKmainfont[BoldFont={FZHei-B01},ItalicFont={FZKai-Z03}]{FZShuSong-Z01}
+\setCJKsansfont[BoldFont={FZHei-B01},ItalicFont={FZHei-B01}]{FZHei-B01}
+\setCJKmonofont[BoldFont={FZHei-B01},ItalicFont={FZHei-B01}]{FZFangSong-Z02}
+\setCJKfamilyfont{zhsong}{FZShuSong-Z01}
+\setCJKfamilyfont{zhhei}{FZHei-B01}
+\setCJKfamilyfont{zhkai}{FZKai-Z03}
+\setCJKfamilyfont{zhfs}{FZFangSong-Z02}
+\newcommand*{\songti}{\CJKfamily{zhsong}}
+\newcommand*{\heiti}{\CJKfamily{zhhei}}
+\newcommand*{\kaishu}{\CJKfamily{zhkai}}
+\newcommand*{\fangsong}{\CJKfamily{zhfs}}
+\end{lstlisting}
+
+
+\subsection[颜色主题]{颜色主题\footnote{测试章节脚注。}}
+
+本模板默认颜色主题为北大红，即 \textcolor{pku}{pku}。除此之外内置 5 套颜色主题，分别是 \textcolor{eblue}{blue}（默认），\textcolor{egreen}{green}， \textcolor{ecyan}{cyan}， \textcolor{sakura}{sakura} 和 \textcolor{black}{black}。如果不需要颜色，可以选择黑色（black）主题。颜色主题的设置方法：
+\begin{lstlisting}[frame=none]  
+  \documentclass[green]{elegantnote}
+  \documentclass[color=green]{elegantnote}
+  ...
+  \documentclass[black]{elegantnote}
+  \documentclass[color=black]{elegantnote}
+\end{lstlisting}
+
+\subsection{全局字号}
+全局字体大小支持：8pt, 9pt, 10pt, 11pt, 12pt（我们所要求的小四）, 14pt, 17pt 和 20pt；
+
+\subsection{参考文献格式}
+参考格式显示格式修改 \lstinline{cite} 可选为 \lstinline{authoryear}、\lstinline{numbers} （默认）和 \lstinline{super}。
+
+\subsection{语言模式}
+
+本模板在改为实验报告模板后，暂时只支持中文。
+
+
+\subsection{定理类环境}
+
+此模板采用了 \lstinline{amsthm} 中的定理样式，使用了 4 类定理样式，所包含的环境分别为
+\begin{itemize}
+  \item \textbf{定理类}：theorem，lemma，proposition，corollary；
+  \item \textbf{定义类}：definition，conjecture，example；
+  \item \textbf{备注类}：remark，note，case；
+  \item \textbf{证明类}：proof。
+\end{itemize}
+
+\begin{remark}
+在选用默认的 \lstinline{lang=cn} 时，定理类环境的引导词全部为中文，这些引导词也可以在 \lstinline{.cls} 文件中自行修改。
+\end{remark}
+
+\subsection{单位制}
+此模板使用了 \lstinline{siunitx} 宏包，可以通过 \lstinline{\si} 等命令渲染规范的国际单位。
+
+
+\section{数据与结果}
+
+\begin{table}[htbp]
+	\centering
+	\small
+	\caption{这是一个三线表的标题}
+	\begin{tabular}{ccc}
+		\toprule
+		组别 &       物理量/单位       &        物理量/单位    \\
+		\midrule
+		$\cdots$ & $\cdots$ & $\cdots$ \\
+		\bottomrule
+	\end{tabular}%
+	\label{tab:1}%
+\end{table}%
+
+根据表~\ref{tab:1}，这个实验应该重做。
+
+
+\begin{definition}[土豆]
+	土豆就是跨院系选课开启时的北京大学选课网。
+\end{definition}
+
+\begin{example}
+	2021年9月15日北京时间17:00的北京大学选课网是土豆。
+\end{example}
+
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.7\textwidth]{logo_pku.png}
+	
+	\
+	
+	\caption{这是北京大学标识管理办公室提供的徽标}
+	\label{fig:1}%
+\end{figure}
+
+
+\begin{theorem}[Hartree Fock 方程]\label{thm:HF}
+对于无自旋、质量为 $m$ 的全同 $N$ 费米子体系，若 $V_1(\mathbf r)$ 是位矢为 $\mathbf r$ 的粒子所拥有的外场势能，$\varphi_n(\mathbf r)$ 为第 $n$ 个粒子的单粒子波函数，则 Hartree-Fock 方程为
+\begin{equation}\label{eq:HF}
+  \left[-\frac{\hbar^2}{2m}\Delta+V_1(\mathbf r)+V^{\text{dir}}(\mathbf r)\right]\varphi_n(\mathbf r)-\int\text d^3r'V_\text{ex}(\mathbf r,\mathbf r')\varphi_n(\mathbf r')=\tilde e_n\varphi_n(\mathbf r)
+\end{equation}
+\end{theorem}
+
+
+根据定理~\ref{thm:HF}，我们可以近似求解弱关联费米子体系在外场下的波函数。
+
+
+\section{结果与讨论}
+
+限于我们的水平，难免还存在错误和不当之处，恳请读者批评指正~\cite{pcl2002}。
+
+
+\nocite{*}
+\bibliography{reference}
+
+
+\end{document}
